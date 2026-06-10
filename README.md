@@ -88,10 +88,10 @@ Your ERD must clearly show:
 
 You need to submit your ERD as:
 
-- **Lucidchart** or **Draw.io** ERD Tool
+- **[Lucidchart](https://www.lucidchart.com)** or **[Draw.io](https://app.diagrams.net)** ERD Tool
 - Submit a public, shareable ERD link (ensure permissions are set to "Anyone with the link can view").
 
-## Part 2: Schema & Sample Data (Open the [QUERY.sql](./QUERY.sql) file and start your queries from there)
+## Schema & Sample Data 
 
 ### 1. Users Table
 
@@ -122,7 +122,7 @@ You need to submit your ERD as:
 | 504 | 2 | 101 | *NULL* | *NULL* | 150 |
 | 505 | 3 | 102 | C-20 | Pending | 120 |
 
-## Part 3: SQL Queries & Expected Sample Output
+## Part 2: SQL Queries & Expected Sample Output (Open the [QUERY.sql](./QUERY.sql) file and start your queries from there)
 
 ### Query 1: Retrieve all upcoming football matches belonging to the 'Champions League' where the match status is 'Available'.
 
@@ -204,7 +204,7 @@ You need to submit your ERD as:
 | 103 | Bayern Munich vs PSG | 130 |
 | 102 | Man City vs Liverpool | 120 |
 
-## Part 4: Theory Questions (Viva Practice - `Answer any 3`)
+## Part 3: Theory Questions (Viva Practice - `Answer any 3`)
 
 **Question 1:** What role does a Foreign Key play in the Bookings table, and how does it safeguard against entering a ticket sale for a match that doesn't exist?
 
