@@ -220,8 +220,8 @@ You need to submit your ERD as:
 
 1. Use your smartphone selfie camera or laptop webcam in **landscape (horizontal) mode**.
 2. Record in a well-lit, quiet room with your face fully visible throughout the video.
-3. Select and answer any **2 questions** from the list above, spoken in **English**.
-4. Keep each answer between 2**–5 minutes**. Speak naturally from your understanding — avoid reading verbatim from notes or scripts.
+3. Select and answer any **3 questions** from the list above, spoken in **English**.
+4. Keep each answer between 2–5 minutes**. Speak naturally from your understanding — avoid reading verbatim from notes or scripts.
 5. Upload your video to Google Drive, YouTube (Unlisted), or any cloud platform, and share a publicly accessible link.
 
 ## Evaluation Criteria
