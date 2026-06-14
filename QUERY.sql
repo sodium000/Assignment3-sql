@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS Users;
 -- =========================================================================
 -- 1. CREATE USERS TABLE
 -- =========================================================================
-CREATE TABLE users (
+CREATE TABLE Users (
     -- Write your constraint to make 'user_id' the Primary Key
     user_id SERIAL PRIMARY KEY,
     full_name VARCHAR(20),
@@ -18,7 +18,7 @@ CREATE TABLE users (
 
     -- Write your check constraint to restrict 'role' to specific allowed strings
     role VARCHAR(20) NOT NULL
-        CHECK (role IN ('ticket_manager', 'football_fan')),
+        CHECK (role IN ('Ticket Manager', 'Football Fan')),
 
     phone_number VARCHAR(15)
 );
@@ -37,7 +37,7 @@ CREATE TABLE Matches (
         CHECK (base_ticket_price >= 0),
         
     -- Write your check constraint to restrict 'match_status' values
-    match_status VARCHAR(20) NOT NULL
+    match_status VARCHAR(20)
         CHECK (match_status IN (
             'Available',
             'Selling Fast',
@@ -58,10 +58,10 @@ CREATE TABLE Bookings (
 
     -- Write your Foreign Key constraint linking 'match_id' to the Matches table
     match_id INT NOT NULL REFERENCES Matches(match_id),
-    seat_number VARCHAR(20) NOT NULL,
+    seat_number VARCHAR(20),
 
     -- Write your check constraint to restrict 'payment_status' values
-    payment_status VARCHAR(20) NOT NULL
+    payment_status VARCHAR(20) 
         CHECK (payment_status IN (
             'Pending',
             'Confirmed',
@@ -103,3 +103,77 @@ INSERT INTO Bookings (booking_id, user_id, match_id, seat_number, payment_status
 (503, 2, 101, 'A-13', 'Confirmed', 150.00),
 (504, 2, 101, NULL, NULL, 150.00),
 (505, 3, 102, 'C-20', 'Pending', 120.00);
+
+
+-- SELECT STATEMENTS TO VERIFY THE DATA
+-- Part 2: Retrieve all queries to verify the data in each table
+
+
+-- Query 1: Retrieve all upcoming football matches belonging to the 'Champions League' where the match status is 'Available'.
+
+SELECT
+    match_id,
+    fixture,
+    base_ticket_price
+FROM Matches
+WHERE tournament_category = 'Champions League'
+  AND match_status = 'Available';
+
+
+-- Query 2: Search for all users whose full names start with 'Tanvir' or contain the phrase 'Haque' (case-insensitive).
+SELECT
+    user_id,
+    full_name,
+    email
+FROM Users
+WHERE full_name ILIKE 'Tanvir%'
+   OR full_name ILIKE '%Haque%';
+
+
+-- Query 3: Retrieve all booking records where the payment status is missing (NULL), replacing the empty result with 'Action Required'.
+SELECT
+    booking_id,
+    user_id,
+    match_id,
+    COALESCE(payment_status, 'Action Required') AS systematic_status
+FROM Bookings
+WHERE payment_status IS NULL;
+
+
+-- Query 4: Retrieve match booking details along with the User's full name and the scheduled Match fixture teams.
+
+SELECT
+    b.booking_id,
+    u.full_name,
+    m.fixture,
+    b.total_cost
+FROM Bookings AS b
+INNER JOIN Users AS u
+    ON b.user_id = u.user_id
+INNER JOIN Matches AS m
+    ON b.match_id = m.match_id;
+
+
+-- Query 5: Display a comprehensive list of all users and their booking IDs, ensuring that fans who have never bought a ticket are still listed.
+
+    SELECT
+    u.user_id,
+    u.full_name,
+    b.booking_id
+FROM Users AS u
+LEFT JOIN Bookings AS b
+    ON u.user_id = b.user_id
+ORDER BY u.user_id, b.booking_id;
+
+
+-- Query 6: Find all ticket bookings where the total cost is strictly higher than the average cost of all ticket bookings.
+
+SELECT
+    booking_id,
+    match_id,
+    total_cost
+FROM Bookings
+WHERE total_cost > (
+    SELECT AVG(total_cost)
+    FROM Bookings
+);
