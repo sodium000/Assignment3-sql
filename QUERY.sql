@@ -11,10 +11,10 @@ DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
     -- Write your constraint to make 'user_id' the Primary Key
     user_id SERIAL PRIMARY KEY,
-    full_name VARCHAR(20),
+    full_name VARCHAR(100),
 
     -- Write your constraint to ensure 'email' values are never duplicated
-    email VARCHAR(20) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
 
     -- Write your check constraint to restrict 'role' to specific allowed strings
     role VARCHAR(20) NOT NULL
